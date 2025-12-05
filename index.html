@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <title>PMPML Pass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Devanagari', system-ui, sans-serif;
+    }
+    body {
+      background: #ffe8ef;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 10px;
+    }
+    .app {
+      width: 360px;
+      max-width: 100%;
+    }
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .left-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .close {
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .top-link {
+      text-decoration: underline;
+      color: #555;
+      cursor: pointer;
+    }
+    .pass-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding-bottom: 14px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .marathi-title {
+      background: #d8252f;
+      color: #fff;
+      text-align: center;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .content {
+      padding: 16px 18px 8px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .label {
+      color: #777;
+      font-size: 12px;
+    }
+    .value {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .large-value {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .fare {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .sub {
+      font-size: 12px;
+    }
+    .center-text {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+    .logo-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      animation: logoPop 1.3s ease-in-out infinite;
+      transform-origin: center center;
+    }
+    @keyframes logoPop {
+      0%   { transform: scale(0.9); opacity: 0.9; }
+      50%  { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.9; }
+    }
+    .expired-text {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .qr-btn {
+      margin-top: 18px;
+      background: #e9fff0;
+      border-radius: 10px;
+      border: 1px solid #3bab6b;
+      height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .qr-icon-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #3bab6b;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-template-rows: repeat(2,1fr);
+    }
+    .qr-icon-box span {
+      border-right: 2px solid #3bab6b;
+      border-bottom: 2px solid #3bab6b;
+    }
+    .qr-icon-box span:nth-child(2),
+    .qr-icon-box span:nth-child(4) { border-right: none; }
+    .qr-icon-box span:nth-child(3),
+    .qr-icon-box span:nth-child(4) { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top-bar">
+      <div class="left-top">
+        <span class="close">✕</span>
+      </div>
+      <div style="display:flex; gap:16px;">
+        <span class="top-link">Need Help?</span>
+        <span class="top-link">All passes</span>
+      </div>
+    </div>
+
+    <div class="pass-card">
+      <div class="marathi-title">
+        पुणे महानगर परिवहन महामंडळ लि.
+      </div>
+
+      <div class="content">
+        <div class="row">
+          <div>
+            <div class="label">Pass Type</div>
+            <div class="large-value">PMC &amp; PCMC</div>
+          </div>
+          <div>
+            <div class="label">ID</div>
+            <div class="large-value">1880</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="label">Fare</div>
+            <div class="fare">₹70.8</div>
+            <div class="sub">3</div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC BOOKING / VALIDITY -->
+        <div class="row" style="margin-top:10px;">
+          <div>
+            <div class="label">Booking Time</div>
+            <div class="value" id="bookingTime"></div>
+          </div>
+          <div style="text-align:right;">
+            <div class="label">Validity Time</div>
+            <div class="value" id="validityTime"></div>
+          </div>
+        </div>
+
+        <p class="center-text">25111718002TP38I</p>
+
+        <div class="logo-wrap">
+          <!-- use your logo file name here -->
+          <img src="pmpml-logo.png" alt="PMPML Logo" class="logo-img">
+        </div>
+
+        <div class="expired-text">Expired</div>
+      </div>
+    </div>
+
+    <div class="qr-btn">
+      <div class="qr-icon-box">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span>Show QR code</span>
+    </div>
+  </div>
+
+  <!-- SCRIPT TO SET DATE/TIME AUTOMATICALLY -->
+  <script>
+  function formatDateTime(date) {
+    const day   = String(date.getDate()).padStart(2, "0");
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const month = months[date.getMonth()];
+    const year  = String(date.getFullYear()).slice(-2);
+
+    let hours   = date.getHours();
+    const mins  = String(date.getMinutes()).padStart(2, "0");
+    const ampm  = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+
+    return `${day} ${month}, ${year} | ${hours}:${mins} ${ampm}`;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+
+    // Booking time: today at 7:00 AM
+    const booking = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      7, 0, 0
+    );
+
+    // Validity time: today at 11:59 PM
+    const validity = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      23, 59, 0
+    );
+
+    document.getElementById("bookingTime").textContent  = formatDateTime(booking);
+    document.getElementById("validityTime").textContent = formatDateTime(validity);
+  });
+</script>
+</body>
+</html>
